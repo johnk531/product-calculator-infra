@@ -1,0 +1,10 @@
+version: '3'
+services:
+  back:
+    build: .
+    command: npm run dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./back-end/product-calculator-back:/usr/app
+      - /usr/app/node_modules 
