@@ -8,18 +8,6 @@ Install the containers and start the aplication
   docker compose up
 ```
 
-## .env 
-
-environment variables to your .env
-
-`PORT_FRONT=`
-
-`PORT_BACK=`
-
-`PORT_REDIS=`
-
-`URL_CONNECT_MONGODB=`
-
 ## Stacks of the Application
 
 **Infra:** Docker, Nginx, Redis & MongoDB
