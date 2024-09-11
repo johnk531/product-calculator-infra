@@ -1,0 +1,18 @@
+FROM node:18-alpine as builder
+WORKDIR /usr/app
+
+COPY ./front-end/product-calculator-next/*package.json ./
+RUN npm install --quiet
+COPY ./front-end/product-calculator-next ./
+RUN npm run build
+
+FROM node:18-alpine as runner
+WORKDIR /usr/app
+COPY --from=builder ./front-end/product-calculator-next/package.json .
+COPY --from=builder ./front-end/product-calculator-next/package-lock.json .
+COPY --from=builder ./front-end/product-calculator-next/next.config.js ./
+COPY --from=builder ./front-end/product-calculator-next/public ./public
+COPY --from=builder ./front-end/product-calculator-next/.next/standalone ./
+COPY --from=builder ./front-end/product-calculator-next/.next/static ./.next/static
+EXPOSE 3000
+ENTRYPOINT ["npm", "start"]
