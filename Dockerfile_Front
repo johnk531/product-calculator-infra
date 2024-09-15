@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:22.2.0-alpine as builder
 WORKDIR /usr/app
 
 COPY ./front-end/product-calculator-next/*package.json ./
@@ -6,7 +6,7 @@ RUN npm install --quiet
 COPY ./front-end/product-calculator-next ./
 RUN npm run build
 
-FROM node:18-alpine as runner
+FROM node:22.2.0-alpine as runner
 WORKDIR /usr/app
 COPY --from=builder ./front-end/product-calculator-next/package.json .
 COPY --from=builder ./front-end/product-calculator-next/package-lock.json .
